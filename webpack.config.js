@@ -3,7 +3,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -19,11 +18,13 @@ module.exports = {
     new UglifyJsPlugin({ sourceMap: true }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'doctor-finder',
+      title: 'Tamagotchi',
       template: './src/index.html',
       inject: 'body'
     }),
-    new Dotenv()
+    new CopyWebpackPlugin ([
+      {from:'src/img', to:"img"}
+    ]),
   ],
   mode: 'development',
   module: {
@@ -55,15 +56,15 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jp(e*)g|svg)$/,
-        use: [{
-            loader: 'url-loader',
-            options: {
-                limit: 10000, // Convert images < 8kb to base64 strings
-                name: 'img/[hash]-[name].[ext]'
-            }
-        }]
-      }
+       test: /\.(png|jp(e*)g|svg)$/,
+       use: [{
+           loader: 'url-loader',
+           options: {
+               limit: 10000, // Convert images < 8kb to base64 strings
+               name: 'img/[hash]-[name].[ext]'
+           }
+       }]
+     }
     ]
   },
 };
