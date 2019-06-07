@@ -4,11 +4,24 @@
     <title>Doctor Finder</title>
      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
      <link href="styles.css" rel="stylesheet">
-     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-     <script src="main.js"></script>
-     <script src=".js"></script>
+     <script src="http://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="container">
+      <label for="condition">Please enter the condition you are seeking treatment for:</label><br>
+      <input id="condition" type="text"><br>
+      <button class="btn-info" id="doctorCondition">Search Doctors</button><br>
+      <div class="show-condition">
+      </div>
+
+      <label for="first-name">Please enter a first name to search for:</label><br>
+      <input id="first-name" type="text"><br>
+      <label for="last-name">Please enter a last name to search for:</label><br>
+      <input id="last-name" type="text"><br>
+      <button class="btn-info" id="doctorName">Search Doctors</button><br>
+      <div class="show-name">
+      </div>
     </div>
   </body>
