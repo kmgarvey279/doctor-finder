@@ -10,6 +10,17 @@
   </head>
   <body>
     <div class="container">
+      <label for="location-state">Please enter your state</label><br>
+      <input id="location-state" type="text" maxlength="2"><br>
+      <label for="location-city">Please enter your city</label><br>
+      <input id="location-city" type="text"><br>
+      <button class="btn-info" id="user-location">Enter Location</button><br>
+
+      <select id="specialty">
+        <span id="dropdown-specialties">
+      </select><br>
+      <button class="btn-info" id="doctorSpecialty">Search Doctors</button><br>
+
       <label for="condition">Please enter the condition you are seeking treatment for:</label><br>
       <input id="condition" type="text"><br>
       <button class="btn-info" id="doctorCondition">Search Doctors</button><br>
@@ -22,5 +33,7 @@
 
       <div id="results">
       </div>
+      <div id="map">
+      </div>  
     </div>
   </body>
