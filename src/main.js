@@ -12,6 +12,7 @@ function showResults(body) {
   for(let i = 0; i < body.data.length; i++) {
     let firstName = `${body.data[i].profile.first_name}`;
     let lastName = `${body.data[i].profile.last_name}`;
+    $('#results').append("Name: " + lastName + ", " + firstName + "<br>");
     for(let j = 0; j < body.data[i].practices.length; j++){
       let practiceName = `${body.data[i].practices[j].name}`;
       let addressStreet = `${body.data[i].practices[j].visit_address.street}`;
@@ -22,18 +23,32 @@ function showResults(body) {
       if(website == "undefined") {
         website = "n/a";
       }
+      $('#results').append(practiceName + "<br>" + "Address: " + addressStreet + "<br>" + addressCity + "," + addressState + "<br>" + "Phone Number: " + phone + "<br>" + "Website: " + website + "<br>");
     }
     let newPatientsBool = `${body.data[i].practices[0].accepts_new_patients}`;
     console.log(newPatientsBool);
     let newPatientsStr = "";
     if(newPatientsBool === "true") {
-      newPatientsStr = "This doctor is currently accepting new patients."
+      $('#results').append("This doctor is currently accepting new patients." + "<br><br>");
     } else {
-      newPatientsStr = "This doctor is not currently accepting new patients."
+      $('#results').append("This doctor is not currently accepting new patients." + "<br><br>");
     }
-    $('#results').append("Name: " + lastName + ", " + firstName + "<br>" + "Practice: " + practiceName + "<br>" + "Address: " + addressStreet + "<br>" + addressCity + "," + addressState + "<br>" + "Phone Number: " + phone + "<br>" + "Website: " + website + "<br>" + newPatientsStr + "<br><br>");
   }
 }
+
+// function showDoctorMap() {
+//   window.onload = function() {
+//         L.mapquest.key = `${process.env.DOC_KEY}`;
+//
+//         var map = L.mapquest.map('map', {
+//           center: [37.7749, -122.4194],
+//           layers: L.mapquest.tileLayer('map'),
+//           zoom: 12
+//         });
+//
+//         map.addControl(L.mapquest.control());
+//       }
+// }
 
 function populateSpecialties() {
   let promise = new Promise(function(resolve, reject) {
@@ -52,7 +67,8 @@ function populateSpecialties() {
   promise.then(function(response) {
     let body = JSON.parse(response);
     for(let i = 0; i < body.data.length; i++){
-      $("#dropdown-specialties").append('<option value="' + body.data[i].uid + '">' + body.data[i].name + '</option>');
+      $("#specialty").append('<option value="' + body.data[i].uid + '">' + body.data[i].name + '</option>');
+      console.log('<option value="' + body.data[i].uid + '">' + body.data[i].name + '</option>');
     }
   }, function(error) {
     $('showErrors').text(`There was an error processing your request: ${error.message}`);
@@ -63,13 +79,14 @@ let doctorFinder = new DoctorFinder();
 
 $(document).ready(function() {
   $("#user-location").click(function() {
+    event.preventDefault();
     let state = $('#location-state').val();
-    let city $('#location-city').val().toLowerCase();
-    let location = state + "-" + city
+    let city = $('#location-city').val();
     $('#location-state').val("");
     $('#location-city').val("");
-    doctorFinder.setLocation(location);
+    doctorFinder.setLocation(city, state);
     populateSpecialties();
+    // showDoctorMap();
   });
 
   $("#doctorSpecialty").click(function() {

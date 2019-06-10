@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -25,6 +26,7 @@ module.exports = {
     new CopyWebpackPlugin ([
       {from:'src/img', to:"img"}
     ]),
+    new Dotenv()
   ],
   mode: 'development',
   module: {
