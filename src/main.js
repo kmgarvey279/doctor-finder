@@ -19,19 +19,20 @@ function showResults(body) {
       let addressCity = `${body.data[i].practices[j].visit_address.city}`;
       let addressState = `${body.data[i].practices[j].visit_address.state}`;
       let phone = `${body.data[i].practices[j].phones[j].number}`;
+      let formatedPhone = "(" + phone.slice(0, 3) + ") " + phone.slice(3,6) + "-" + phone.slice(6,10);
       let website = `${body.data[i].practices[j].website}`;
       if(website == "undefined") {
         website = "n/a";
       }
-      $('#results').append(practiceName + "<br>" + "Address: " + addressStreet + "<br>" + addressCity + "," + addressState + "<br>" + "Phone Number: " + phone + "<br>" + "Website: " + website + "<br>" + "<br>");
+      $('#results').append(practiceName + "<br>" + addressStreet + "<br>" + addressCity + ", " + addressState + "<br>" + "Phone Number: " + formatedPhone + "<br>" + "Website: " + website + "<br><br>");
     }
     let newPatientsBool = `${body.data[i].practices[0].accepts_new_patients}`;
     console.log(newPatientsBool);
     let newPatientsStr = "";
     if(newPatientsBool === "true") {
-      $('#results').append("This doctor is currently accepting new patients." + "<br><br>");
+      $('#results').append("<span id='true'>" + "This doctor is currently accepting new patients." + "</span><br><br>");
     } else {
-      $('#results').append("This doctor is not currently accepting new patients." + "<br><br>");
+      $('#results').append("<span id='false'>" + "This doctor is not currently accepting new patients." + "</span><br><br>");
     }
   }
 }
@@ -64,7 +65,7 @@ function populateSpecialties() {
 let doctorFinder = new DoctorFinder();
 
 $(document).ready(function() {
-  $("#user-location").click(function() {
+  $("form.location-form").submit(function() {
     event.preventDefault();
     let state = $('#location-state').val().toLowerCase();
     let city = $('#location-city').val().toLowerCase();
@@ -79,6 +80,7 @@ $(document).ready(function() {
 
   $("#change-location").click(function() {
     event.preventDefault();
+    $('#current-location').empty();
     $(".search-form").hide();
     $(".location-form").show();
   });
