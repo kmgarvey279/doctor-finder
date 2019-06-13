@@ -11,30 +11,40 @@
     <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest-maps.css"/>
   </head>
   <body>
-    <div class="container">
-      <label for="location-state">Please enter your state</label><br>
-      <input id="location-state" type="text" maxlength="2"><br>
-      <label for="location-city">Please enter your city</label><br>
-      <input id="location-city" type="text"><br>
-      <button class="btn-info" id="user-location">Enter Location</button><br>
-
-      <select id="specialty">
-      </select><br>
-      <button class="btn-info" id="doctorSpecialty">Search Doctors</button><br>
-
-      <label for="condition">Please enter the condition you are seeking treatment for:</label><br>
-      <input id="condition" type="text"><br>
-      <button class="btn-info" id="doctorCondition">Search Doctors</button><br>
-
-      <label for="first-name">Please enter a first name to search for:</label><br>
-      <input id="first-name" type="text"><br>
-      <label for="last-name">Please enter a last name to search for:</label><br>
-      <input id="last-name" type="text"><br>
-      <button class="btn-info" id="doctorName">Search Doctors</button><br>
-
-      <div id="results">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Doctor Finder</h2>
+        <img src="img/dr_mario_64.png" weight="200px" height="200px" alt="Doctor Mario">
       </div>
-      <div id="map" style="width: 100%; height: 530px;"></div>
+    </div>
+    <div class="container">
+      <form class="location-form">
+        <label for="location-state">Please enter your state</label><br>
+        <input id="location-state" class="form-control" type="text" maxlength="2" required><br>
+        <label for="location-city">Please enter your city</label><br>
+        <input id="location-city" class="form-control" type="text" required><br>
+        <button class="btn-info" id="user-location">Confirm Location</button><br>
+      </form>
+      <div class="search-form">
+        <p>Current Search Location: <span id="current-location"></span></p><br>
+        <button type="submit" class="btn-info" id="change-location">Change Location</button><br>
+
+        <select id="specialty">
+        </select><br>
+        <button class="btn-info" id="doctorSpecialty">Search Doctors</button><img src="img/pill.png" weight="40px" height="40px" alt="pill"><br>
+
+        <label for="condition">Please enter the condition you are seeking treatment for:</label><br>
+        <input id="condition" type="text"><br>
+        <button class="btn-info" id="doctorCondition">Search Doctors</button><img src="img/pill.png" weight="40px" height="40px" alt="pill"><br>
+
+        <label for="first-name">Please enter a first name to search for:</label><br>
+        <input id="first-name" type="text"><br>
+        <label for="last-name">Please enter a last name to search for:</label><br>
+        <input id="last-name" type="text"><br>
+        <button class="btn-info" id="doctorName">Search Doctors</button><img src="img/pill.png" weight="40px" height="40px" alt="pill"><br>
+
+        <div id="results">
+        </div>
       </div>
     </div>
   </body>

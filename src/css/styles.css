@@ -1,0 +1,12 @@
+.search-form {
+  display: none;
+}
+
+.card {
+  background-color: lightblue;
+}
+
+body {
+  background-color: pink;
+  text-align: center;
+}

@@ -12,7 +12,7 @@ function showResults(body) {
   for(let i = 0; i < body.data.length; i++) {
     let firstName = `${body.data[i].profile.first_name}`;
     let lastName = `${body.data[i].profile.last_name}`;
-    $('#results').append("Name: " + lastName + ", " + firstName + "<br>");
+    $('#results').append("<strong>" + lastName + ", " + firstName + "<strong>" + "<br>");
     for(let j = 0; j < body.data[i].practices.length; j++){
       let practiceName = `${body.data[i].practices[j].name}`;
       let addressStreet = `${body.data[i].practices[j].visit_address.street}`;
@@ -23,7 +23,7 @@ function showResults(body) {
       if(website == "undefined") {
         website = "n/a";
       }
-      $('#results').append(practiceName + "<br>" + "Address: " + addressStreet + "<br>" + addressCity + "," + addressState + "<br>" + "Phone Number: " + phone + "<br>" + "Website: " + website + "<br>");
+      $('#results').append(practiceName + "<br>" + "Address: " + addressStreet + "<br>" + addressCity + "," + addressState + "<br>" + "Phone Number: " + phone + "<br>" + "Website: " + website + "<br>" + "<br>");
     }
     let newPatientsBool = `${body.data[i].practices[0].accepts_new_patients}`;
     console.log(newPatientsBool);
@@ -35,20 +35,6 @@ function showResults(body) {
     }
   }
 }
-
-// function showDoctorMap() {
-//   window.onload = function() {
-//         L.mapquest.key = `${process.env.DOC_KEY}`;
-//
-//         var map = L.mapquest.map('map', {
-//           center: [37.7749, -122.4194],
-//           layers: L.mapquest.tileLayer('map'),
-//           zoom: 12
-//         });
-//
-//         map.addControl(L.mapquest.control());
-//       }
-// }
 
 function populateSpecialties() {
   let promise = new Promise(function(resolve, reject) {
@@ -80,13 +66,21 @@ let doctorFinder = new DoctorFinder();
 $(document).ready(function() {
   $("#user-location").click(function() {
     event.preventDefault();
-    let state = $('#location-state').val();
-    let city = $('#location-city').val();
+    let state = $('#location-state').val().toLowerCase();
+    let city = $('#location-city').val().toLowerCase();
     $('#location-state').val("");
     $('#location-city').val("");
     doctorFinder.setLocation(city, state);
+    $('#current-location').append(city + "-" + state);
     populateSpecialties();
-    // showDoctorMap();
+    $(".search-form").show();
+    $(".location-form").hide();
+  });
+
+  $("#change-location").click(function() {
+    event.preventDefault();
+    $(".search-form").hide();
+    $(".location-form").show();
   });
 
   $("#doctorSpecialty").click(function() {
